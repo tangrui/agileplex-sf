@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.agileplex.com/dev/schema/awf"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:ans="http://www.agileplex.com/dev/schema/awf">
+	<element name="configuration">
+		<complexType>
+			<sequence>
+				<element name="WorkflowManager" type="ans:classType" minOccurs="0" maxOccurs="1"/>
+				<element name="WorkflowSessionFactory" type="ans:classType" minOccurs="0"/>
+				<element name="IdGenerator" type="ans:classType" minOccurs="0"/>
+
+				<element name="workflows">
+					<complexType>
+						<all>
+							<element name="workflow" minOccurs="0" maxOccurs="unbounded">
+							 <complexType>
+							     <attribute name="resource" type="string" use="required"></attribute>
+							 </complexType>
+							</element>
+						</all>
+					</complexType>
+				</element>
+            </sequence>
+		</complexType>
+	</element>
+
+	<complexType name="classType">
+		<attribute name="class" type="string" use="required"></attribute>
+	</complexType>
+</schema>

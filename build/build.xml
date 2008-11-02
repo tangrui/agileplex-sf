@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ - build file
+ -
+ - @creator Rui Tang
+ - @date 2008-02-17
+ -
+ - @LastChanged
+ - @LastChangedBy $LastChangedBy: tangrui $
+ - @LastChangedDate $LastChangedDate: 2008-02-18 19:39:01 +0800 (一, 18 二月 2008) $
+ - @LastChangedRevision $LastChangedRevision: 2 $
+-->
+<project basedir=".." default="build" name="agileplex-workflow-api">
+    <property file="build/build.properties" />
+    <property environment="env" />
+
+    <property name="src" value="./src" />
+    <property name="build" value="./build" />
+
+    <target name="build">
+        <mkdir dir="${build}/classes" />
+        <javac
+            srcdir="${src}"
+            destdir="${build}/classes"
+            source="1.5"
+            target="1.5"
+            debug="on"
+            encoding="utf-8"
+            listfiles="yes"
+            >
+            <compilerarg value="-Xlint"/>
+            <exclude name="**/_svn" />
+            <exclude name="**/.svn" />
+        </javac>
+    </target>
+
+    <target name="jar" depends="build">
+        <mkdir dir="${build}/bin"/>
+        <jar 
+            jarfile="${build}/bin/${ant.project.name}-${version}.jar" 
+            basedir="${build}/classes"
+            >
+            <include name="**/*.class" />
+        </jar>
+    </target>
+
+    <target name="clean-build">
+        <delete dir="${build}/classes" includeemptydirs="true" />
+        <delete dir="${build}/bin" includeemptydirs="true" />
+    </target>
+
+    <target name="rebuild" depends="clean-build, build" />
+</project>

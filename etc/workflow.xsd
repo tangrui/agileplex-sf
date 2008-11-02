@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.agileplex.com/dev/schema/awf-wf"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:ans="http://www.agileplex.com/dev/schema/awf-wf">
+
+	<element name="workflow">
+		<complexType>
+			<sequence>
+				<element name="states" type="ans:statesType"
+					minOccurs="1" maxOccurs="1" />
+				<element name="stateGroups" type="ans:stateGroupsType"
+				    minOccurs="0" maxOccurs="1" />
+				<element name="actions" type="ans:actionsType"
+					minOccurs="1" maxOccurs="1" />
+			</sequence>
+			<attribute name="name" type="string" use="required"></attribute>
+		</complexType>
+	</element>
+
+	<complexType name="statesType">
+		<sequence>
+			<element name="state" minOccurs="2" maxOccurs="unbounded">
+				<complexType>
+                    <sequence>
+                        <element name="actionChooser"
+                             type="ans:classType" maxOccurs="1"
+                             minOccurs="0">
+                        </element>
+                    </sequence>
+
+					<attribute name="name" type="string" use="required"/>
+					<attribute name="type" use="optional">
+						<simpleType>
+							<restriction base="string">
+								<enumeration value="start" />
+								<enumeration value="normal" />
+								<enumeration value="finish" />
+							</restriction>
+						</simpleType>
+					</attribute>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="stateGroupsType">
+	   <sequence>
+	   	<element name="stateGroup">
+	   		<complexType>
+	   			<sequence>
+	   				<element name="state" minOccurs="0"
+	   					maxOccurs="unbounded" type="ans:stateNodeType" />	   			</sequence>
+	   		</complexType>
+	   	</element>
+	   </sequence>
+	</complexType>
+
+    <complexType name="actionsType">
+    	<sequence>
+    		<element name="action" minOccurs="1" maxOccurs="unbounded">
+    			<complexType>
+                    <sequence>
+                    	<element name="beforeActionHandler"
+                    		minOccurs="0" maxOccurs="unbounded"
+                    		type="ans:classType">
+                    	</element>
+                    	<element name="onActionHandler"
+                    		type="ans:classType" maxOccurs="1"
+                    		minOccurs="0">
+                    	</element>
+                    	<element name="afterActionHandler" type="ans:classType" minOccurs="0" maxOccurs="unbounded"></element>
+                    </sequence>
+                    <attribute name="name" type="string" use="required"/>
+                    <attribute name="from" type="string" use="required"/>
+                    <attribute name="to" type="string" use="required"/>
+    			</complexType>
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="classType">
+      <attribute name="class" type="string" use="required"/>
+    </complexType>
+
+
+    <complexType name="stateNodeType">
+    	<attribute name="name" type="string" use="required"></attribute>
+    </complexType>
+</schema>

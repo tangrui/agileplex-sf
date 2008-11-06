@@ -18,4 +18,14 @@ import com.agileplex.core.common.NamedObject;
 
 public interface PetriNetArc extends NamedObject {
     
+    PetriNetBindingResult bind(Object token);
+
+    PetriNetBindingResult bind(PetriNetBindingResult bindingResult, Object token);
+
+    PetriNetBindingResult consume(Object token);
+
+    PetriNetBindingResult consume(PetriNetBindingResult bindingResult, Object token);
+
+    Object produce(PetriNetBindingResult bindingResult);
+
 }

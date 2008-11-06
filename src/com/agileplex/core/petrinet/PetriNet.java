@@ -20,8 +20,8 @@ public interface PetriNet extends NamedObject {
 
     PetriNetSchema getSchema();
 
-    PetriNetContext mark(PetriNetPlace place, Object token);
-    
+    PetriNetContext createContext();
+
     void mark(PetriNetContext context, PetriNetPlace place, Object token);
     
     void transit(PetriNetContext context);
